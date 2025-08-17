@@ -3,11 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resume - Praveen V</title>
-    <link rel="stylesheet" href="/assest/css/style.css" />
+    <title>Praveen V - Machine Learning Engineer</title>
+
+    <!-- FontAwesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
     <style>
-      /* Floating navbar — identical to About */
+      :root {
+        --card: #ffffff;
+        --muted: #b0b4b8;
+        --accent: #ffffff;
+        --radius: 36px;
+        --primary: #ff6f61;
+        --primary-hover: #ff826e;
+        --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: var(--bg-gradient);
+        color: #fff;
+        line-height: 1.6;
+      }
+
+      /* ---------------- Header ---------------- */
+      header {
+        text-align: center;
+        padding: 70px 20px 30px;
+      }
+
+      header h1 {
+        font-size: 3rem;
+        margin: 5px 0;
+        color: var(--primary);
+      }
+
+      header h2 {
+        font-size: 1.4rem;
+        margin: 10px 0;
+        color: #ddd;
+      }
+
+      .contact a {
+        color: var(--primary);
+        text-decoration: none;
+        margin: 0 8px;
+      }
+
+      .download-btn {
+        display: inline-block;
+        margin-top: 18px;
+        padding: 10px 20px;
+        border-radius: 25px;
+        background: var(--primary);
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+      .download-btn:hover {
+        background: var(--primary-hover);
+      }
+
+      /* ---------------- Section ---------------- */
+      section {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      section h3 {
+        color: var(--primary);
+        border-bottom: 2px solid var(--primary);
+        display: inline-block;
+        padding-bottom: 5px;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      ul li {
+        margin-bottom: 8px;
+      }
+
+      /* ---------------- Projects & Skills ---------------- */
+      .projects,
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 15px;
+        transition: transform 0.3s, background 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .skills-icons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 30px;
+      }
+
+      .skills-icons div {
+        text-align: center;
+      }
+
+      /* ----------------- Floating Navbar ----------------- */
       .floating-nav {
         position: fixed;
         top: 0;
@@ -17,15 +132,14 @@
         gap: 20px;
         padding: 10px 24px;
         border-radius: 999px;
-
         background: rgba(15, 23, 42, 0.7);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.15);
-
         z-index: 1000;
         transition: transform 0.3s ease, opacity 0.3s ease;
       }
+
       .floating-nav a {
         color: #fff;
         font-size: 14px;
@@ -33,11 +147,11 @@
         transition: color 0.3s ease, transform 0.2s ease;
       }
       .floating-nav a:hover {
-        color: #38bdf8;
+        color: var(--primary);
         transform: translateY(-2px);
       }
       .floating-nav a[aria-current="page"] {
-        color: #38bdf8;
+        color: var(--primary);
         font-weight: bold;
       }
       .floating-nav.hide {
@@ -45,224 +159,236 @@
         opacity: 0;
       }
 
-      /* Thin top indicator — identical to About */
+      @media (max-width: 768px) {
+        .floating-nav {
+          gap: 10px;
+          padding: 8px 16px;
+          font-size: 12px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+
+      /* ---------------- Scroll Indicator ---------------- */
       .nav-indicator {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 3px;
-        background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--primary),
+          transparent
+        );
         opacity: 0;
         transition: opacity 0.3s ease;
         z-index: 999;
       }
       .nav-indicator.show {
-        opacity: 0.9;
-        animation: pulseGlow 1.5s infinite alternate;
-      }
-      @keyframes pulseGlow {
-        0% {
-          box-shadow: 0 0 6px #38bdf8;
-        }
-        100% {
-          box-shadow: 0 0 16px #38bdf8;
-        }
+        opacity: 0.7;
       }
 
-      /* Page theme — identical base as About */
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        color: #fff;
-        background: #0f172a;
-      }
-
-      /* Card style to match About’s sections */
-      .section-card {
-        max-width: 900px;
-        margin: 80px auto 40px auto;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 24px;
-        border-radius: 16px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .section-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-      }
-
-      /* Resume specific bits */
-      .resume-buttons {
-        margin-bottom: 20px;
-      }
-      .resume-buttons a {
-        display: inline-block;
-        padding: 10px 18px;
-        margin: 5px;
-        background: var(--primary, #38bdf8);
-        color: #fff;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: background 0.3s ease, transform 0.2s ease;
-      }
-      .resume-buttons a:hover {
-        background: var(--primary-hover, #5ad0ff);
-        transform: translateY(-1px);
-      }
-      .resume-frame {
-        width: 100%;
-        height: 80vh;
-        border: none;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-      }
-      .note {
-        margin-top: 15px;
-        font-size: 14px;
-        color: #aaa;
-      }
-
+      /* ---------------- Footer ---------------- */
       footer {
         text-align: center;
-        padding: 20px;
-        color: #aaa;
-      }
-      footer a {
-        color: #38bdf8;
-        text-decoration: none;
+        padding: 30px 20px;
+        color: var(--muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 50px;
       }
     </style>
   </head>
+
   <body>
-    <canvas id="particles"></canvas>
+    <!-- Floating Navbar -->
+    <div class="nav-indicator"></div>
+    <nav class="floating-nav">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/skills/">Skills</a>
+      <a href="/projects/">Projects</a>
+      <a href="/resume/" aria-current="page">Resume</a>
+      <a href="/contact/">Contact</a>
+    </nav>
 
+    <!-- Header -->
     <header>
-      <div class="nav-indicator"></div>
-      <nav class="floating-nav" id="floatingNav">
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <a href="/skills/">Skills</a>
-        <a href="/projects/">Projects</a>
-        <a href="/resume/" aria-current="page">Resume</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </header>
-
-    <main>
-      <div class="section-card">
-        <h1>My Resume</h1>
-        <div class="resume-buttons">
-          <a href="/assest/pdf/resume.pdf" download>📄 Download PDF</a>
-          <a
-            href="https://linkedin.com/in/praveen-v-ml"
-            target="_blank"
-            rel="noopener"
-            >🔗 View on LinkedIn</a
-          >
-        </div>
-
-        <iframe
-          src="/assest/pdf/resume.pdf#page=1"
-          class="resume-frame"
-          frameborder="0"
-        ></iframe>
-
-        <p class="note">
-          💡 Tip: You can download this PDF or view it directly on LinkedIn for
-          the latest updates.
-        </p>
-      </div>
-    </main>
-
-    <footer>
-      <div>© 2025 All rights reserved.</div>
-      <div>
-        <a
-          href="https://linkedin.com/in/praveen-v-ml"
-          target="_blank"
-          rel="noopener"
+      <h1>Praveen V</h1>
+      <h2>Machine Learning Engineer</h2>
+      <div class="contact">
+        <span>📍 Chennai, India</span> |
+        <a href="mailto:praveen33105@gmail.com">📧 Email</a> |
+        <a href="https://praveen.xo.je" target="_blank">🌐 Website</a> |
+        <a href="https://linkedin.com/in/praveen-v-ml" target="_blank"
           >LinkedIn</a
         >
-        /
-        <a href="https://github.com/Blood-titan" target="_blank" rel="noopener"
-          >GitHub</a
-        >
+        | <a href="https://github.com/Blood-titan" target="_blank">GitHub</a> |
+        <span>📞 +91-89XXX-XXXX</span>
       </div>
-    </footer>
+      <!-- Download Resume -->
+      <a href="resume.pdf" download class="download-btn">
+        <i class="fas fa-download"></i> Download Resume
+      </a>
+    </header>
 
+    <!-- Career Objective -->
+    <section>
+      <h3>Career Objective</h3>
+      <p>
+        Aspiring Machine Learning Engineer with a strong foundation in Python,
+        Data Science, and AI. Passionate about solving real-world problems using
+        machine learning techniques. Eager to apply knowledge in data analysis,
+        model development, and AI-driven solutions.
+      </p>
+    </section>
+
+    <!-- Technical Skills -->
+    <section>
+      <h3>Technical Skills</h3>
+      <div class="skills-icons">
+        <div>
+          <i
+            class="fab fa-python"
+            style="font-size: 3rem; color: #306998"
+            aria-hidden="true"
+          ></i>
+          <p>Python</p>
+        </div>
+        <div>
+          <i
+            class="fab fa-java"
+            style="font-size: 3rem; color: #f89820"
+            aria-hidden="true"
+          ></i>
+          <p>Java</p>
+        </div>
+        <div>
+          <i
+            class="fas fa-robot"
+            style="font-size: 3rem; color: #ff6f61"
+            aria-hidden="true"
+          ></i>
+          <p>Machine Learning</p>
+        </div>
+        <div>
+          <i
+            class="fas fa-database"
+            style="font-size: 3rem; color: #1abc9c"
+            aria-hidden="true"
+          ></i>
+          <p>Data Handling</p>
+        </div>
+        <div>
+          <i
+            class="fab fa-github"
+            style="font-size: 3rem; color: #fff"
+            aria-hidden="true"
+          ></i>
+          <p>Git & GitHub</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <h3>Projects</h3>
+      <div class="projects">
+        <div class="card">
+          <strong>House Price Prediction</strong>
+          <ul>
+            <li>
+              Built ML model using Linear Regression to predict house prices.
+            </li>
+            <li>
+              Utilized Python, Pandas, and Scikit-Learn for data analysis and
+              model training.
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>Weather App</strong>
+          <ul>
+            <li>
+              Interactive Streamlit app showing real-time weather data from
+              WeatherAPI.
+            </li>
+            <li>
+              Implemented caching, error handling, and user-friendly interface.
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <strong>Expense Tracker</strong>
+          <ul>
+            <li>
+              Full-stack expense tracker with HTML, CSS, JavaScript frontend &
+              Java Spring Boot backend.
+            </li>
+            <li>
+              Allows users to manage and monitor personal finances efficiently.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h3>Education</h3>
+      <ul>
+        <li>
+          B.E in Artificial Intelligence & Machine Learning, Kings Engineering
+          College, Chennai (Expected 2026)
+        </li>
+        <li>
+          HSC & SSLC from Marya Nivas Matriculation Higher Secondary School,
+          Pozhichalur, Chennai
+        </li>
+      </ul>
+    </section>
+
+    <!-- Additional -->
+    <section>
+      <h3>Additional Information</h3>
+      <ul>
+        <li>Languages: English, Tamil</li>
+        <li>
+          Certifications: Machine Learning Course (Grade A+), Machine Learning
+          with Python Training Program
+        </li>
+        <li>Internship: Artificial Intelligence Internship, Rinex</li>
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer>© 2025 Praveen V. All rights reserved.</footer>
+
+    <!-- Scripts -->
     <script>
-      // Floating nav behavior — same as About
-      const nav = document.getElementById("floatingNav");
+      const nav = document.querySelector(".floating-nav");
       const indicator = document.querySelector(".nav-indicator");
       let lastScroll = 0;
 
-      // Start visible
-      nav.classList.remove("hide");
-
       window.addEventListener("scroll", () => {
-        const currentScroll =
-          window.pageYOffset || document.documentElement.scrollTop;
+        const currentScroll = window.pageYOffset;
         if (currentScroll > lastScroll && currentScroll > 50) {
-          // scrolling down
           nav.classList.add("hide");
           indicator.classList.add("show");
         } else {
-          // scrolling up
           nav.classList.remove("hide");
           indicator.classList.remove("show");
         }
-        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+        lastScroll = currentScroll;
       });
 
-      // Reveal when mouse goes to the top edge
       document.addEventListener("mousemove", (e) => {
         if (e.clientY < 50) {
           nav.classList.remove("hide");
           indicator.classList.remove("show");
         }
       });
-
-      // Particles background — same simple dots
-      const canvas = document.getElementById("particles");
-      const ctx = canvas.getContext("2d");
-      let particles = [];
-      let w, h;
-
-      function initCanvas() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-        particles = [];
-        for (let i = 0; i < 50; i++) {
-          particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 2 + 1,
-            dx: (Math.random() - 0.5) * 0.5,
-            dy: (Math.random() - 0.5) * 0.5,
-          });
-        }
-      }
-
-      function drawParticles() {
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = "rgba(255,255,255,0.6)";
-        particles.forEach((p) => {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-          p.x += p.dx;
-          p.y += p.dy;
-          if (p.x < 0 || p.x > w) p.dx *= -1;
-          if (p.y < 0 || p.y > h) p.dy *= -1;
-        });
-        requestAnimationFrame(drawParticles);
-      }
-
-      window.addEventListener("resize", initCanvas);
-      initCanvas();
-      drawParticles();
     </script>
   </body>
 </html>

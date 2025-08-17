@@ -1,256 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Me - Praveen V</title>
-    <link rel="stylesheet" href="/assest/css/style.css" />
-    <script defer src="script.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me - Praveen V</title>
 
-    <style>
-      /* Floating navbar */
+  <!-- SEO & Social Sharing -->
+  <meta name="description" content="About Praveen V - Machine Learning Engineer in Chennai. Exploring AI, ML, and building data-driven solutions." />
+  <meta property="og:title" content="About Praveen V - Machine Learning Engineer" />
+  <meta property="og:description" content="Praveen V, an AI/ML enthusiast based in Chennai, passionate about turning data into impactful solutions." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/images/profile-preview.jpg" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --card: #ffffff;
+      --muted: #b0b4b8;
+      --accent: #ffffff;
+      --radius: 36px;
+      --primary: #ff6f61;
+      --primary-hover: #ff826e;
+      --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: var(--bg-gradient);
+    }
+
+    /* Floating Navbar */
+    .floating-nav {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 1000;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .floating-nav a {
+      color: #fff;
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    .floating-nav a:hover {
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .floating-nav a[aria-current="page"] {
+      color: var(--primary);
+      font-weight: bold;
+    }
+    .floating-nav.hide {
+      transform: translate(-50%, -120%);
+      opacity: 0;
+    }
+
+    @media (max-width: 768px) {
       .floating-nav {
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 20px;
-        padding: 10px 24px;
-        border-radius: 999px;
+        gap: 10px;
+        padding: 8px 16px;
+        font-size: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
 
-        background: rgba(15, 23, 42, 0.7);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Scroll Indicator */
+    .nav-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 999;
+    }
+    .nav-indicator.show {
+      opacity: 0.7;
+    }
 
-        z-index: 1000;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-      }
-      .floating-nav a {
-        color: #fff;
-        font-size: 14px;
-        text-decoration: none;
-        transition: color 0.3s ease, transform 0.2s ease;
-      }
-      .floating-nav a:hover {
-        color: #38bdf8;
-        transform: translateY(-2px);
-      }
-      .floating-nav a[aria-current="page"] {
-        color: #38bdf8;
-        font-weight: bold;
-      }
-      .floating-nav.hide {
-        transform: translate(-50%, -120%);
-        opacity: 0;
-      }
+    /* Section Cards */
+    .section-card {
+      max-width: 900px;
+      margin: 80px auto 40px auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 24px;
+      border-radius: 16px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+    .section-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .section-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+    .section-card ul {
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .section-card h1, .section-card h2 {
+      color: var(--accent);
+    }
+    .section-card h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    .section-card h2 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
 
-      /* Indicator line full width */
-      .nav-indicator {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(90deg, transparent, #38bdf8, transparent);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: 999;
-      }
-      .nav-indicator.show {
-        opacity: 0.7;
-      }
+    @media (max-width: 600px) {
+      h1 { font-size: 26px; }
+      h2 { font-size: 20px; }
+      p, li { font-size: 15px; }
+    }
 
-      /* Section cards */
-      .section-card {
-        max-width: 900px;
-        margin: 80px auto 40px auto;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 24px;
-        border-radius: 16px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .section-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-      }
-      .section-card ul {
-        padding-left: 20px;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-      .section-card h2 {
-        margin-bottom: 10px;
-        font-size: 22px;
-        color: var(--accent);
-      }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #aaa;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
 
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        color: #fff;
-        background: #0f172a;
-      }
-      footer {
-        text-align: center;
-        padding: 20px;
-        color: #aaa;
-      }
-      footer a {
-        color: #38bdf8;
-        text-decoration: none;
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="particles"></canvas>
+    canvas#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: -1;
+      pointer-events: none;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
 
-    <header>
-      <div class="nav-indicator"></div>
-      <nav class="floating-nav">
-        <a href="/">Home</a>
-        <a href="/about/" aria-current="page">About</a>
-        <a href="/skills/">Skills</a>
-        <a href="/projects/">Projects</a>
-        <a href="/resume/">Resume</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-    </header>
+  <header>
+    <div class="nav-indicator"></div>
+    <nav class="floating-nav">
+      <a href="/">Home</a>
+      <a href="/about/" aria-current="page">About</a>
+      <a href="/skills/">Skills</a>
+      <a href="/projects/">Projects</a>
+      <a href="/resume/">Resume</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </header>
 
-    <main>
-      <div class="section-card">
-        <h1>About Me</h1>
-        <p>
-          Hi, I’m <strong>Praveen V</strong> — a Machine Learning Engineer in
-          the making, based in Chennai, India. I love turning raw data into
-          meaningful insights and building AI-powered solutions that solve
-          real-world problems.
-        </p>
+  <main>
+    <div class="section-card">
+      <h1>About Me</h1>
+      <p>
+        Hi, I’m <strong>Praveen V</strong>, an aspiring Machine Learning Engineer based in Chennai, India. I enjoy turning data into insights and building AI-driven solutions that tackle real-world challenges.
+      </p>
+    </div>
+
+    <div class="section-card">
+      <h2>My Journey</h2>
+      <p>
+        Currently pursuing a B.E in Artificial Intelligence & Machine Learning at Kings Engineering College (Expected 2026). What began as curiosity about "how computers think" has turned into a passion for Python, data science, and machine learning.
+      </p>
+      <p>
+        I’ve built projects from house price prediction models to interactive weather apps. Internships and hands-on projects have strengthened my skills and fueled my desire to keep learning.
+      </p>
+    </div>
+
+    <div class="section-card">
+      <h2>Skills & Tools</h2>
+      <ul>
+        <li>Python (NumPy, Pandas, Scikit-Learn, Matplotlib, Streamlit)</li>
+        <li>Java</li>
+        <li>Machine Learning: Supervised & Unsupervised Learning, Model Training & Evaluation</li>
+        <li>Data Handling: Cleaning, Preprocessing, Feature Engineering</li>
+        <li>Version Control: Git & GitHub</li>
+      </ul>
+    </div>
+
+    <div class="section-card">
+      <h2>Certifications & Languages</h2>
+      <ul>
+        <li>Machine Learning Course, Rinex Organization — Grade A+</li>
+        <li>Machine Learning with Python Training Program, Coincent</li>
+        <li>Languages: English, Tamil</li>
+      </ul>
+    </div>
+
+    <div class="section-card">
+      <h2>Projects I’ve Worked On</h2>
+      <ul>
+        <li><strong>House Price Prediction:</strong> Built a Linear Regression model to predict house prices using Python and Scikit-Learn.</li>
+        <li><strong>Weather App:</strong> Developed an interactive Streamlit app to display real-time weather data for any city, with caching and robust error handling.</li>
+        <li><strong>Expense Tracker:</strong> Full-stack application using HTML, CSS, JavaScript, and Java Spring Boot for personal finance management.</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <span id="year">© 2025 Praveen V. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/praveen-v-ml" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/Blood-titan" target="_blank"><i class="fab fa-github"></i> GitHub</a>
       </div>
+    </div>
+  </footer>
 
-      <div class="section-card">
-        <h2>My Journey</h2>
-        <p>
-          I’m currently pursuing my B.E in Artificial Intelligence & Machine
-          Learning at Kings Engineering College (Expected 2026). What started as
-          curiosity about “how computers think” has grown into a passion for
-          exploring Python, data science, and machine learning.
-        </p>
-        <p>
-          Over the past couple of years, I’ve built projects ranging from price
-          prediction models to weather apps — always aiming to learn something
-          new with each one. My internship experiences have given me a taste of
-          the industry, and I’m eager to keep pushing forward.
-        </p>
-      </div>
+  <script>
+    // Floating nav behavior
+    const nav = document.querySelector(".floating-nav");
+    const indicator = document.querySelector(".nav-indicator");
+    let lastScroll = 0;
 
-      <div class="section-card">
-        <h2>Core Skills</h2>
-        <ul>
-          <li>Python (NumPy, Pandas, Scikit-Learn, Matplotlib, Streamlit)</li>
-          <li>
-            Machine Learning: Model training, evaluation, supervised &
-            unsupervised learning
-          </li>
-          <li>Data cleaning, preprocessing, and feature engineering</li>
-          <li>Version control with Git & GitHub</li>
-        </ul>
-      </div>
-
-      <div class="section-card">
-        <h2>Outside of Code</h2>
-        <p>
-          When I’m not experimenting with algorithms, you might find me
-          exploring new tech trends, reading about AI breakthroughs, or enjoying
-          Tamil and English movies. I believe a good engineer stays curious —
-          both in and out of the lab.
-        </p>
-      </div>
-    </main>
-
-    <footer>
-      <div>© 2025 All rights reserved.</div>
-      <div>
-        <a
-          href="https://linkedin.com/in/praveen-v-ml"
-          target="_blank"
-          rel="noopener"
-          >LinkedIn</a
-        >
-        /
-        <a href="https://github.com/Blood-titan" target="_blank" rel="noopener"
-          >GitHub</a
-        >
-      </div>
-    </footer>
-
-    <script>
-      // Floating nav behavior
-      const nav = document.querySelector(".floating-nav");
-      const indicator = document.querySelector(".nav-indicator");
-      let lastScroll = 0;
-
-      // On page load → nav is visible
-      nav.classList.remove("hide");
-
-      window.addEventListener("scroll", () => {
-        const currentScroll = window.pageYOffset;
-        if (currentScroll > lastScroll && currentScroll > 50) {
-          nav.classList.add("hide");
-          indicator.classList.add("show");
-        } else {
-          nav.classList.remove("hide");
-          indicator.classList.remove("show");
-        }
-        lastScroll = currentScroll;
-      });
-
-      // Show nav when mouse goes near top
-      document.addEventListener("mousemove", (e) => {
-        if (e.clientY < 50) {
-          nav.classList.remove("hide");
-          indicator.classList.remove("show");
-        }
-      });
-
-      // Simple particle background
-      const canvas = document.getElementById("particles");
-      const ctx = canvas.getContext("2d");
-      let particles = [];
-      let w, h;
-
-      function initCanvas() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-        particles = [];
-        for (let i = 0; i < 50; i++) {
-          particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 2 + 1,
-            dx: (Math.random() - 0.5) * 0.5,
-            dy: (Math.random() - 0.5) * 0.5,
-          });
-        }
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > lastScroll && currentScroll > 50) {
+        nav.classList.add("hide");
+        indicator.classList.add("show");
+      } else {
+        nav.classList.remove("hide");
+        indicator.classList.remove("show");
       }
-      function drawParticles() {
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = "rgba(255,255,255,0.6)";
-        particles.forEach((p) => {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-          p.x += p.dx;
-          p.y += p.dy;
-          if (p.x < 0 || p.x > w) p.dx *= -1;
-          if (p.y < 0 || p.y > h) p.dy *= -1;
+      lastScroll = currentScroll;
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (e.clientY < 50) {
+        nav.classList.remove("hide");
+        indicator.classList.remove("show");
+      }
+    });
+
+    // Particle background
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particles = [], w, h;
+
+    function initCanvas() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      particles = [];
+      const particleCount = window.innerWidth < 768 ? 25 : 50;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 2 + 1,
+          dx: (Math.random() - 0.5) * 0.5,
+          dy: (Math.random() - 0.5) * 0.5,
         });
-        requestAnimationFrame(drawParticles);
       }
-      window.addEventListener("resize", initCanvas);
-      initCanvas();
-      drawParticles();
-    </script>
-  </body>
+    }
+    function drawParticles() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(255,255,255,0.6)";
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > w) p.dx *= -1;
+        if (p.y < 0 || p.y > h) p.dy *= -1;
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    window.addEventListener("resize", initCanvas);
+    initCanvas();
+    drawParticles();
+
+    // Scroll animations for cards
+    const cards = document.querySelectorAll(".section-card");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.2 });
+    cards.forEach(card => observer.observe(card));
+  </script>
+</body>
 </html>

@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Skills - Praveen V</title>
-    <link rel="stylesheet" href="/assest/css/style.css" />
+
+    <!-- Icon libraries -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
@@ -13,8 +14,26 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
     <style>
-      /* Floating navbar (MATCHES ABOUT PAGE) */
+      :root {
+        --card: #ffffff;
+        --muted: #b0b4b8;
+        --accent: #ffffff;
+        --radius: 36px;
+        --primary: #ff6f61;
+        --primary-hover: #ff826e;
+        --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        background: var(--bg-gradient);
+      }
+
+      /* Floating Navbar */
       .floating-nav {
         position: fixed;
         top: 0;
@@ -38,11 +57,11 @@
         transition: color 0.3s ease, transform 0.2s ease;
       }
       .floating-nav a:hover {
-        color: #38bdf8;
+        color: var(--primary);
         transform: translateY(-2px);
       }
       .floating-nav a[aria-current="page"] {
-        color: #38bdf8;
+        color: var(--primary);
         font-weight: bold;
       }
       .floating-nav.hide {
@@ -50,35 +69,41 @@
         opacity: 0;
       }
 
-      /* Indicator line with glow animation (MATCHES ABOUT PAGE) */
+      /* Mobile Nav */
+      @media (max-width: 768px) {
+        .floating-nav {
+          gap: 10px;
+          padding: 8px 16px;
+          font-size: 12px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+
+      /* Scroll Indicator */
       .nav-indicator {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 3px;
-        background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--primary),
+          transparent
+        );
         opacity: 0;
         transition: opacity 0.3s ease;
         z-index: 999;
       }
       .nav-indicator.show {
-        opacity: 0.9;
-        animation: pulseGlow 1.5s infinite alternate;
+        opacity: 0.7;
       }
-      @keyframes pulseGlow {
-        0% {
-          box-shadow: 0 0 6px #38bdf8;
-        }
-        100% {
-          box-shadow: 0 0 16px #38bdf8;
-        }
-      }
-
-      /* Section cards (MATCHES ABOUT PAGE) */
+      /* Section cards */
       .section-card {
         max-width: 900px;
-        margin: 80px auto 40px auto;
+        margin: 60px auto 30px auto;
         background: rgba(255, 255, 255, 0.05);
         padding: 24px;
         border-radius: 16px;
@@ -88,7 +113,8 @@
         transform: translateY(-3px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
       }
-      .section-card h2 {
+      .section-card h2,
+      .section-card h1 {
         margin-bottom: 10px;
         font-size: 22px;
         color: var(--accent);
@@ -98,7 +124,7 @@
       .skills-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 20px;
+        gap: 24px;
         margin-top: 20px;
       }
       .skill-card {
@@ -118,30 +144,60 @@
         transform: translateY(-5px);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
       }
+
+      /* Consistent icon sizing */
       .skill-icon {
-        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px; /* font-based icons */
         margin-bottom: 10px;
       }
+      .skill-card img.skill-icon {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+      }
+
       .skill-name {
         font-size: 1.1rem;
         font-weight: bold;
       }
 
-      /* Base theme (MATCHES ABOUT PAGE) */
+      /* Background */
       body {
         margin: 0;
         font-family: Arial, sans-serif;
         color: #fff;
-        background: #0f172a;
+        background: var(--bg-gradient);
+        background-attachment: fixed;
       }
+      #particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
       footer {
         text-align: center;
         padding: 20px;
         color: #aaa;
       }
       footer a {
-        color: #38bdf8;
+        color: var(--accent);
         text-decoration: none;
+      }
+
+      @media (max-width: 600px) {
+        .section-card {
+          margin: 40px auto 20px auto;
+          padding: 16px;
+        }
       }
     </style>
   </head>
@@ -286,29 +342,17 @@
       </div>
     </main>
 
-    <footer>
-      <div>© 2025 All rights reserved.</div>
-      <div>
-        <a
-          href="https://linkedin.com/in/praveen-v-ml"
-          target="_blank"
-          rel="noopener"
-          >LinkedIn</a
-        >
-        /
-        <a href="https://github.com/Blood-titan" target="_blank" rel="noopener"
-          >GitHub</a
-        >
+    <footer class="site-footer">
+      <div class="footer-content">
+        <span>© 2025 Praveen V. All rights reserved.</span>
       </div>
     </footer>
 
     <script>
-      // Floating nav behavior (MATCHES ABOUT PAGE)
+      // Floating nav behavior
       const nav = document.querySelector(".floating-nav");
       const indicator = document.querySelector(".nav-indicator");
       let lastScroll = 0;
-
-      nav.classList.remove("hide");
 
       window.addEventListener("scroll", () => {
         const currentScroll = window.pageYOffset;
@@ -322,7 +366,6 @@
         lastScroll = currentScroll;
       });
 
-      // Show nav when mouse moves near the top
       document.addEventListener("mousemove", (e) => {
         if (e.clientY < 50) {
           nav.classList.remove("hide");
@@ -330,7 +373,7 @@
         }
       });
 
-      // Particle background (same as About)
+      // Particle background
       const canvas = document.getElementById("particles");
       const ctx = canvas.getContext("2d");
       let particles = [];
@@ -368,7 +411,7 @@
       initCanvas();
       drawParticles();
 
-      // Reveal-on-scroll for skill cards
+      // Reveal on scroll
       const skillCards = document.querySelectorAll(".skill-card");
       const observer = new IntersectionObserver(
         (entries) => {
