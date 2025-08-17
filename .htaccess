@@ -1,6 +1,13 @@
-ErrorDocument 400 http://praveen.xo.je/error.html
-ErrorDocument 404 http://praveen.xo.je/error.html
-ErrorDocument 403 http://praveen.xo.je/error.html
+# ===============================
+# Custom Error Pages
+# ===============================
+ErrorDocument 400 /error.html
+ErrorDocument 403 /error.html
+ErrorDocument 404 /error.html
+
+# ===============================
+# Force HTTPS
+# ===============================
 RewriteEngine On
-RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
