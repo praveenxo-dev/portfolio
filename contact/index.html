@@ -4,270 +4,216 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact - Praveen V</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/assest/css/style.css" />
+    <script defer src="script.js"></script>
+
     <style>
-      :root {
-        --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        --card: #ffffff;
-        --muted: #c0c5ca;
-        --accent: #ff6f61;
-        --radius: 36px;
-        --primary: #ff6f61;
-        --primary-hover: #ff826e;
-        --text-light: #fff;
-        --text-muted: #c0c5ca;
+      /* Floating navbar */
+      .floating-nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 20px;
+        padding: 10px 24px;
+        border-radius: 999px;
+
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+
+        z-index: 1000;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      .floating-nav a {
+        color: #fff;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.2s ease;
+      }
+      .floating-nav a:hover {
+        color: #38bdf8;
+        transform: translateY(-2px);
+      }
+      .floating-nav a[aria-current="page"] {
+        color: #38bdf8;
+        font-weight: bold;
+      }
+      .floating-nav.hide {
+        transform: translate(-50%, -120%);
+        opacity: 0;
+      }
+
+      /* Indicator line */
+      .nav-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 999;
+      }
+      .nav-indicator.show {
+        opacity: 0.7;
+      }
+
+      /* Section cards */
+      .section-card {
+        max-width: 900px;
+        margin: 80px auto 40px auto;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 24px;
+        border-radius: 16px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .section-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      }
+      .section-card h1,
+      .section-card h2 {
+        margin-bottom: 10px;
+        font-size: 22px;
+        color: #38bdf8;
+      }
+      .section-card p {
+        line-height: 1.6;
+        color: #ddd;
+      }
+      .section-card a {
+        color: #38bdf8;
+        text-decoration: none;
+      }
+      .section-card a:hover {
+        text-decoration: underline;
       }
 
       body {
-        background: var(--bg-gradient);
-        color: var(--text-light);
-        font-family: "Segoe UI", sans-serif;
         margin: 0;
-        padding: 0;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        background: #0f172a;
       }
-
-      nav a[aria-current="page"] {
-        color: var(--primary);
-        font-weight: bold;
-      }
-
-      .contact-container {
-        max-width: 700px;
-        margin: 0 auto;
-        padding: 24px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 16px;
+      footer {
         text-align: center;
-      }
-
-      .contact-info {
-        margin-bottom: 24px;
-      }
-
-      .contact-info p {
-        margin: 6px 0;
-        color: var(--text-light);
-      }
-
-      .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        text-align: left;
-      }
-
-      .contact-form input,
-      .contact-form textarea {
-        padding: 10px;
-        border: none;
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff;
-        width: 100%;
-        font-family: inherit;
-        font-size: 1rem;
-      }
-
-      .contact-form input::placeholder,
-      .contact-form textarea::placeholder {
-        color: var(--muted);
-        opacity: 1;
-      }
-
-      .contact-form button {
-        padding: 10px 20px;
-        border: none;
-        background: var(--primary);
-        color: #fff;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background 0.3s;
-      }
-
-      .contact-form button:hover {
-        background: var(--primary-hover);
-      }
-
-      .note {
-        margin-top: 16px;
-        font-size: 14px;
+        padding: 20px;
         color: #aaa;
       }
-
-      /* Particle canvas — full screen behind content */
-      #particles {
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1; /* behind .shell/nav/footer */
-        pointer-events: none;
-      }
-
-      .shell {
-        max-width: 1100px;
-        margin: auto;
-        background: rgba(255, 255, 255, 0.03);
-        border-radius: var(--radius);
-        overflow: hidden;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-        padding: 16px;
-      }
-
-      nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 16px 24px;
-      }
-
-      .nav-left {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .nav-left a {
-        color: var(--text-light);
-        text-decoration: none;
-        padding: 6px 14px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.1);
-        transition: background 0.3s;
-      }
-      .nav-left a:hover {
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      .socials a {
-        color: var(--muted);
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-      .socials a:hover {
-        color: var(--primary);
-      }
-
-      h1 {
-        text-align: center;
-        font-size: 2.8rem;
-        margin-bottom: 10px;
-      }
-
-      footer {
-        padding: 18px 24px;
-        font-size: 12px;
-        color: var(--muted);
-        display: flex;
-        justify-content: space-between;
-      }
-
       footer a {
-        color: var(--muted);
+        color: #38bdf8;
         text-decoration: none;
-      }
-      footer a:hover {
-        color: var(--primary);
-      }
-
-      @media (max-width: 768px) {
-        nav {
-          flex-direction: column;
-          gap: 10px;
-        }
-        h1 {
-          font-size: 28px;
-        }
-        .shell {
-          padding: 8px;
-        }
-        .contact-container {
-          padding: 12px;
-        }
       }
     </style>
   </head>
   <body>
     <canvas id="particles"></canvas>
-    <div class="shell">
-      <header>
-        <nav>
-          <div class="nav-left">
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-            <a href="/skills/">Skills</a>
-            <a href="/projects/">Projects</a>
-            <a href="/resume/">Resume</a>
-            <a href="/contact/" aria-current="page">Contact</a>
-          </div>
-          <div class="socials">
-            <a href="https://linkedin.com/in/praveen-v-ml" target="_blank"
-              >LinkedIn</a
-            >
-            <a href="https://github.com/Blood-titan" target="_blank">GitHub</a>
-          </div>
-        </nav>
-      </header>
-      <main>
+
+    <header>
+      <div class="nav-indicator"></div>
+      <nav class="floating-nav">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/skills/">Skills</a>
+        <a href="/projects/">Projects</a>
+        <a href="/resume/">Resume</a>
+        <a href="/contact/" aria-current="page">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="section-card">
         <h1>Contact Me</h1>
-        <div class="contact-container">
-          <div class="contact-info">
-            <p><strong>Name:</strong> Praveen V</p>
-            <p><strong>Location:</strong> Chennai, India</p>
-            <p>
-              <strong>Email:</strong>
-              <a
-                href="mailto:praveen33105@gmail.com"
-                style="color: var(--accent)"
-                >praveen33105@gmail.com</a
-              >
-            </p>
-            <p><strong>Phone:</strong> +91-89XXXXXXX</p>
-            <p>
-              <strong>LinkedIn:</strong>
-              <a
-                href="https://linkedin.com/in/praveen-v-ml"
-                target="_blank"
-                style="color: var(--accent)"
-              >
-                linkedin.com/in/praveen-v-ml
-              </a>
-            </p>
-            <p>
-              <strong>GitHub:</strong>
-              <a
-                href="https://github.com/Blood-titan"
-                target="_blank"
-                style="color: var(--accent)"
-              >
-                github.com/Blood-titan
-              </a>
-            </p>
-          </div>
-          <div class="note">
-            💡 I’m currently a college student and fresher in the industry. Open
-            to internships, freelance projects, and collaborative opportunities.
-          </div>
-        </div>
-      </main>
-    </div>
+        <p>
+          Let’s connect! Whether you have a project idea, collaboration
+          opportunity, or just want to say hi — feel free to reach out.
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2>Details</h2>
+        <p><strong>Name:</strong> Praveen V</p>
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:praveen33105@gmail.com">praveen33105@gmail.com</a>
+        </p>
+        <p><strong>Phone:</strong> +91-89XXXXXXX</p>
+        <p>
+          <strong>LinkedIn:</strong>
+          <a href="https://linkedin.com/in/praveen-v-ml" target="_blank"
+            >linkedin.com/in/praveen-v-ml</a
+          >
+        </p>
+        <p>
+          <strong>GitHub:</strong>
+          <a href="https://github.com/Blood-titan" target="_blank"
+            >github.com/Blood-titan</a
+          >
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2>Note</h2>
+        <p>
+          💡 I’m currently a college student and fresher in the industry. Open
+          to internships, freelance projects, and collaborations.
+        </p>
+      </div>
+    </main>
+
     <footer>
       <div>© 2025 All rights reserved.</div>
       <div>
-        <a href="https://linkedin.com/in/praveen-v-ml" target="_blank"
+        <a
+          href="https://linkedin.com/in/praveen-v-ml"
+          target="_blank"
+          rel="noopener"
           >LinkedIn</a
         >
         /
-        <a href="https://github.com/Blood-titan" target="_blank">GitHub</a>
+        <a href="https://github.com/Blood-titan" target="_blank" rel="noopener"
+          >GitHub</a
+        >
       </div>
     </footer>
+
     <script>
-      // Particle background animation
+      // Floating nav behavior
+      const nav = document.querySelector(".floating-nav");
+      const indicator = document.querySelector(".nav-indicator");
+      let lastScroll = 0;
+
+      nav.classList.remove("hide");
+
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > lastScroll && currentScroll > 50) {
+          nav.classList.add("hide");
+          indicator.classList.add("show");
+        } else {
+          nav.classList.remove("hide");
+          indicator.classList.remove("show");
+        }
+        lastScroll = currentScroll;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (e.clientY < 50) {
+          nav.classList.remove("hide");
+          indicator.classList.remove("show");
+        }
+      });
+
+      // Particle background
       const canvas = document.getElementById("particles");
       const ctx = canvas.getContext("2d");
       let particles = [];
       let w, h;
+
       function initCanvas() {
         w = canvas.width = window.innerWidth;
         h = canvas.height = window.innerHeight;

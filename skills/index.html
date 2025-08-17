@@ -14,19 +14,87 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
-      nav a[aria-current="page"] {
-        color: var(--primary);
+      /* Floating navbar (MATCHES ABOUT PAGE) */
+      .floating-nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 20px;
+        padding: 10px 24px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        z-index: 1000;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      .floating-nav a {
+        color: #fff;
+        font-size: 14px;
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.2s ease;
+      }
+      .floating-nav a:hover {
+        color: #38bdf8;
+        transform: translateY(-2px);
+      }
+      .floating-nav a[aria-current="page"] {
+        color: #38bdf8;
         font-weight: bold;
       }
-      section {
-        margin-top: 30px;
+      .floating-nav.hide {
+        transform: translate(-50%, -120%);
+        opacity: 0;
       }
-      section h2 {
-        font-size: 1.6rem;
-        margin-bottom: 15px;
-        border-left: 4px solid var(--primary);
-        padding-left: 10px;
+
+      /* Indicator line with glow animation (MATCHES ABOUT PAGE) */
+      .nav-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 999;
       }
+      .nav-indicator.show {
+        opacity: 0.9;
+        animation: pulseGlow 1.5s infinite alternate;
+      }
+      @keyframes pulseGlow {
+        0% {
+          box-shadow: 0 0 6px #38bdf8;
+        }
+        100% {
+          box-shadow: 0 0 16px #38bdf8;
+        }
+      }
+
+      /* Section cards (MATCHES ABOUT PAGE) */
+      .section-card {
+        max-width: 900px;
+        margin: 80px auto 40px auto;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 24px;
+        border-radius: 16px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .section-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      }
+      .section-card h2 {
+        margin-bottom: 10px;
+        font-size: 22px;
+        color: var(--accent);
+      }
+
+      /* Skills grid */
       .skills-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -58,190 +126,216 @@
         font-size: 1.1rem;
         font-weight: bold;
       }
+
+      /* Base theme (MATCHES ABOUT PAGE) */
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        background: #0f172a;
+      }
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: #aaa;
+      }
+      footer a {
+        color: #38bdf8;
+        text-decoration: none;
+      }
     </style>
   </head>
   <body>
     <canvas id="particles"></canvas>
 
-    <div class="shell">
-      <header>
-        <nav>
-          <div class="nav-left">
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-            <a href="/skills/" aria-current="page">Skills</a>
-            <a href="/projects/">Projects</a>
-            <a href="/resume/">Resume</a>
-            <a href="/contact/">Contact</a>
-          </div>
-          <div class="socials">
-            <a href="https://linkedin.com/in/praveen-v-ml" target="_blank"
-              >LinkedIn</a
-            >
-            <a href="https://github.com/Blood-titan" target="_blank">GitHub</a>
-          </div>
-        </nav>
-      </header>
+    <header>
+      <div class="nav-indicator"></div>
+      <nav class="floating-nav">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/skills/" aria-current="page">Skills</a>
+        <a href="/projects/">Projects</a>
+        <a href="/resume/">Resume</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </header>
 
-      <main>
+    <main>
+      <div class="section-card">
         <h1>Skills</h1>
+        <p>Here are the tools and technologies I use regularly.</p>
+      </div>
 
-        <!-- Technical Skills -->
-        <!-- Technical Skills -->
-        <section>
-          <h2>Technical Skills</h2>
-          <div class="skills-grid">
-            <div class="skill-card">
-              <i class="devicon-python-plain colored skill-icon"></i>
-              <div class="skill-name">Python</div>
-            </div>
-            <div class="skill-card">
-              <i class="devicon-java-plain colored skill-icon"></i>
-              <div class="skill-name">Java</div>
-            </div>
-
-            <div class="skill-card">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Pandas_logo.svg"
-                alt="Pandas"
-                class="skill-icon"
-                style="width: 48px; height: 48px"
-              />
-              <div class="skill-name">Pandas</div>
-            </div>
-
-            <div class="skill-card">
-              <i class="devicon-scikitlearn-plain colored skill-icon"></i>
-              <div class="skill-name">Scikit-Learn</div>
-            </div>
-            <div class="skill-card">
-              <i class="devicon-tensorflow-original colored skill-icon"></i>
-              <div class="skill-name">TensorFlow</div>
-            </div>
-            <div class="skill-card">
-              <i class="devicon-pytorch-original colored skill-icon"></i>
-              <div class="skill-name">PyTorch</div>
-            </div>
-            <div class="skill-card">
-              <i class="devicon-matplotlib-plain colored skill-icon"></i>
-              <div class="skill-name">Matplotlib</div>
-            </div>
-            <div class="skill-card">
-              <i class="devicon-opencv-plain colored skill-icon"></i>
-              <div class="skill-name">OpenCV</div>
-            </div>
-
-            <div class="skill-card">
-              <i class="devicon-mysql-plain colored skill-icon"></i>
-              <div class="skill-name">SQL</div>
-            </div>
-            <div class="skill-card">
-              <i
-                class="fa-solid fa-brain skill-icon"
-                style="color: #f39c12"
-              ></i>
-              <div class="skill-name">Machine Learning</div>
-            </div>
-            <div class="skill-card">
-              <i
-                class="fa-solid fa-robot skill-icon"
-                style="color: #ff4757"
-              ></i>
-              <div class="skill-name">AI Model Development</div>
-            </div>
-            <div class="skill-card">
-              <i
-                class="fa-solid fa-database skill-icon"
-                style="color: #3498db"
-              ></i>
-              <div class="skill-name">Data Handling</div>
-            </div>
-            <div class="skill-card">
-              <i class="devicon-git-plain colored skill-icon"></i>
-              <div class="skill-name">Git</div>
-            </div>
-            <div class="skill-card">
-              <i class="devicon-github-original skill-icon"></i>
-              <div class="skill-name">GitHub</div>
-            </div>
-            <div class="skill-card">
-              <i
-                class="fa-solid fa-laptop-code skill-icon"
-                style="color: #2ecc71"
-              ></i>
-              <div class="skill-name">Streamlit</div>
-            </div>
+      <div class="section-card">
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <i class="devicon-python-plain colored skill-icon"></i>
+            <div class="skill-name">Python</div>
           </div>
-        </section>
-
-        <!-- Extra Skills -->
-        <section>
-          <h2>Extra Skills</h2>
-          <div class="skills-grid">
-            <div class="skill-card">
-              <i
-                class="fa-solid fa-users skill-icon"
-                style="color: #2ecc71"
-              ></i>
-              <div class="skill-name">Team Collaboration</div>
-            </div>
-            <div class="skill-card">
-              <i
-                class="fa-solid fa-comments skill-icon"
-                style="color: #9b59b6"
-              ></i>
-              <div class="skill-name">Communication Skills</div>
-            </div>
-            <div class="skill-card">
-              <i
-                class="fa-solid fa-lightbulb skill-icon"
-                style="color: #f1c40f"
-              ></i>
-              <div class="skill-name">Problem Solving</div>
-            </div>
-            <div class="skill-card">
-              <i
-                class="fa-solid fa-chart-line skill-icon"
-                style="color: #e67e22"
-              ></i>
-              <div class="skill-name">Data Analysis</div>
-            </div>
-            <div class="skill-card">
-              <i
-                class="fa-solid fa-clock skill-icon"
-                style="color: #1abc9c"
-              ></i>
-              <div class="skill-name">Time Management</div>
-            </div>
-            <div class="skill-card">
-              <i
-                class="fa-solid fa-wand-magic-sparkles skill-icon"
-                style="color: #ff6f61"
-              ></i>
-              <div class="skill-name">Creative Thinking</div>
-            </div>
+          <div class="skill-card">
+            <i class="devicon-java-plain colored skill-icon"></i>
+            <div class="skill-name">Java</div>
           </div>
-        </section>
-      </main>
-    </div>
+          <div class="skill-card">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Pandas_logo.svg"
+              alt="Pandas"
+              class="skill-icon"
+              style="width: 48px; height: 48px"
+            />
+            <div class="skill-name">Pandas</div>
+          </div>
+          <div class="skill-card">
+            <i class="devicon-scikitlearn-plain colored skill-icon"></i>
+            <div class="skill-name">Scikit-Learn</div>
+          </div>
+          <div class="skill-card">
+            <i class="devicon-tensorflow-original colored skill-icon"></i>
+            <div class="skill-name">TensorFlow</div>
+          </div>
+          <div class="skill-card">
+            <i class="devicon-pytorch-original colored skill-icon"></i>
+            <div class="skill-name">PyTorch</div>
+          </div>
+          <div class="skill-card">
+            <i class="devicon-matplotlib-plain colored skill-icon"></i>
+            <div class="skill-name">Matplotlib</div>
+          </div>
+          <div class="skill-card">
+            <i class="devicon-opencv-plain colored skill-icon"></i>
+            <div class="skill-name">OpenCV</div>
+          </div>
+          <div class="skill-card">
+            <i class="devicon-mysql-plain colored skill-icon"></i>
+            <div class="skill-name">SQL</div>
+          </div>
+          <div class="skill-card">
+            <i class="fa-solid fa-brain skill-icon" style="color: #f39c12"></i>
+            <div class="skill-name">Machine Learning</div>
+          </div>
+          <div class="skill-card">
+            <i class="fa-solid fa-robot skill-icon" style="color: #ff4757"></i>
+            <div class="skill-name">AI Model Development</div>
+          </div>
+          <div class="skill-card">
+            <i
+              class="fa-solid fa-database skill-icon"
+              style="color: #3498db"
+            ></i>
+            <div class="skill-name">Data Handling</div>
+          </div>
+          <div class="skill-card">
+            <i class="devicon-git-plain colored skill-icon"></i>
+            <div class="skill-name">Git</div>
+          </div>
+          <div class="skill-card">
+            <i class="devicon-github-original skill-icon"></i>
+            <div class="skill-name">GitHub</div>
+          </div>
+          <div class="skill-card">
+            <i
+              class="fa-solid fa-laptop-code skill-icon"
+              style="color: #2ecc71"
+            ></i>
+            <div class="skill-name">Streamlit</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Extra Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <i class="fa-solid fa-users skill-icon" style="color: #2ecc71"></i>
+            <div class="skill-name">Team Collaboration</div>
+          </div>
+          <div class="skill-card">
+            <i
+              class="fa-solid fa-comments skill-icon"
+              style="color: #9b59b6"
+            ></i>
+            <div class="skill-name">Communication Skills</div>
+          </div>
+          <div class="skill-card">
+            <i
+              class="fa-solid fa-lightbulb skill-icon"
+              style="color: #f1c40f"
+            ></i>
+            <div class="skill-name">Problem Solving</div>
+          </div>
+          <div class="skill-card">
+            <i
+              class="fa-solid fa-chart-line skill-icon"
+              style="color: #e67e22"
+            ></i>
+            <div class="skill-name">Data Analysis</div>
+          </div>
+          <div class="skill-card">
+            <i class="fa-solid fa-clock skill-icon" style="color: #1abc9c"></i>
+            <div class="skill-name">Time Management</div>
+          </div>
+          <div class="skill-card">
+            <i
+              class="fa-solid fa-wand-magic-sparkles skill-icon"
+              style="color: #ff6f61"
+            ></i>
+            <div class="skill-name">Creative Thinking</div>
+          </div>
+        </div>
+      </div>
+    </main>
 
     <footer>
       <div>© 2025 All rights reserved.</div>
       <div>
-        <a href="https://linkedin.com/in/praveen-v-ml" target="_blank"
+        <a
+          href="https://linkedin.com/in/praveen-v-ml"
+          target="_blank"
+          rel="noopener"
           >LinkedIn</a
         >
         /
-        <a href="https://github.com/Blood-titan" target="_blank">GitHub</a>
+        <a href="https://github.com/Blood-titan" target="_blank" rel="noopener"
+          >GitHub</a
+        >
       </div>
     </footer>
 
     <script>
-      // Particles from index.html
+      // Floating nav behavior (MATCHES ABOUT PAGE)
+      const nav = document.querySelector(".floating-nav");
+      const indicator = document.querySelector(".nav-indicator");
+      let lastScroll = 0;
+
+      nav.classList.remove("hide");
+
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > lastScroll && currentScroll > 50) {
+          nav.classList.add("hide");
+          indicator.classList.add("show");
+        } else {
+          nav.classList.remove("hide");
+          indicator.classList.remove("show");
+        }
+        lastScroll = currentScroll;
+      });
+
+      // Show nav when mouse moves near the top
+      document.addEventListener("mousemove", (e) => {
+        if (e.clientY < 50) {
+          nav.classList.remove("hide");
+          indicator.classList.remove("show");
+        }
+      });
+
+      // Particle background (same as About)
       const canvas = document.getElementById("particles");
       const ctx = canvas.getContext("2d");
       let particles = [];
       let w, h;
+
       function initCanvas() {
         w = canvas.width = window.innerWidth;
         h = canvas.height = window.innerHeight;
@@ -274,19 +368,16 @@
       initCanvas();
       drawParticles();
 
-      // Scroll animation
+      // Reveal-on-scroll for skill cards
       const skillCards = document.querySelectorAll(".skill-card");
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-            }
+            if (entry.isIntersecting) entry.target.classList.add("visible");
           });
         },
         { threshold: 0.2 }
       );
-
       skillCards.forEach((card) => observer.observe(card));
     </script>
   </body>

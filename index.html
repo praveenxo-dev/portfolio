@@ -12,6 +12,11 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
     <style>
       :root {
         --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
@@ -42,16 +47,6 @@
         height: 100%;
         z-index: -1;
       }
-      .shell {
-        max-width: 1100px;
-        margin: auto;
-        background: rgba(255, 255, 255, 0.03);
-        border-radius: var(--radius);
-        overflow: hidden;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-      }
-      /* Navigation */
       nav {
         display: flex;
         justify-content: space-between;
@@ -75,6 +70,9 @@
       .pill:hover {
         background: rgba(255, 255, 255, 0.2);
       }
+      .socials {
+        display: flex;
+      }
       .socials a {
         color: var(--muted);
         text-decoration: none;
@@ -84,7 +82,18 @@
       .socials a:hover {
         color: var(--primary);
       }
-      /* Mobile Menu */
+      .socials.desktop {
+        padding-right: 150px;
+      }
+      .socials.mobile {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0;
+      }
+      .socials.mobile a {
+        margin: 6px 0;
+      }
       .menu-toggle {
         display: none;
         flex-direction: column;
@@ -95,18 +104,6 @@
         width: 25px;
         height: 3px;
         background: var(--accent);
-      }
-      .socials {
-        display: flex;
-      }
-      .socials.mobile {
-        display: none;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 0;
-      }
-      .socials.mobile a {
-        margin: 6px 0;
       }
       /* Hero */
       .hero {
@@ -155,11 +152,13 @@
         overflow: hidden;
         background: rgba(255, 255, 255, 0.05);
         padding: 16px 0;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
       }
       .logos {
         display: flex;
         gap: 20px;
-        animation: scrollLogos 15s linear infinite;
+        animation: scrollLogos 20s linear infinite;
         will-change: transform;
       }
       .logo {
@@ -169,6 +168,15 @@
         border-radius: 8px;
         white-space: nowrap;
         font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 15px;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+      .logo:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: scale(1.08);
       }
       @keyframes scrollLogos {
         from {
@@ -212,7 +220,6 @@
         padding: 48px 24px;
         background: rgba(255, 255, 255, 0.05);
       }
-      /* Footer */
       footer {
         padding: 18px 24px;
         font-size: 12px;
@@ -220,7 +227,6 @@
         display: flex;
         justify-content: space-between;
       }
-      /* Responsive */
       @media (max-width: 768px) {
         nav {
           flex-direction: column;
@@ -228,6 +234,7 @@
         }
         .menu-toggle {
           display: flex;
+          margin-left: auto;
         }
         .socials.desktop {
           display: none;
@@ -239,31 +246,179 @@
           font-size: 28px;
         }
       }
+      /* Dropdown */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+        margin-left: auto;
+      }
+      .dropbtn {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--accent);
+        padding: 6px 14px;
+        font-size: 14px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      .dropbtn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background: rgba(20, 20, 20, 0.95);
+        min-width: 160px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+        overflow: hidden;
+      }
+      .dropdown-content a {
+        color: #fff;
+        padding: 12px 16px;
+        display: block;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .dropdown-content a:hover {
+        background: var(--primary);
+        color: #fff;
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      .socials a i {
+        margin-right: 6px;
+        font-size: 16px;
+        vertical-align: middle;
+        color: var(--muted);
+        transition: color 0.3s ease;
+      }
+      .socials a:hover i {
+        color: var(--primary);
+      }
+      /* Sticky navbar with blur */
+      nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        z-index: 1000;
+
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease-in-out;
+      }
+
+      /* Pills (Email, CV, Explore) */
+      .pill {
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      /* Hover glow effect */
+      .pill:hover {
+        background: rgba(56, 189, 248, 0.2); /* soft teal-blue */
+        border-color: rgba(56, 189, 248, 0.6);
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.7),
+          0 0 20px rgba(56, 189, 248, 0.4);
+        transform: translateY(-2px);
+      }
+
+      /* On scroll — shrink effect */
+      nav.scrolled {
+        padding: 8px 20px;
+        background: rgba(15, 23, 42, 0.85);
+      }
+
+      nav.scrolled .pill {
+        font-size: 13px;
+        padding: 5px 12px;
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between; /* left + right */
+        align-items: center;
+        padding: 12px 24px;
+        z-index: 1000;
+
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease-in-out;
+      }
+
+      .nav-right a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
+      }
+
+      .nav-right a:hover {
+        color: #38bdf8; /* glowing teal hover */
+      }
     </style>
   </head>
   <body>
     <canvas id="particles"></canvas>
     <div class="shell">
+      <!-- Navigation -->
       <nav>
-        <div class="nav-left">
+        <!-- Left Side -->
+        <div
+          class="nav-left"
+          style="display: flex; align-items: center; gap: 12px"
+        >
           <div class="pill" id="copyEmail">praveen33105@gmail.com</div>
           <div class="pill" onclick="downloadCV()">CV</div>
+
+          <!-- Dropdown Menu -->
+          <div class="dropdown">
+            <button class="dropbtn">
+              Explore <i class="fas fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="/"><i class="fas fa-house"></i> Home</a>
+              <a href="/about/"><i class="fas fa-user"></i> About</a>
+              <a href="/skills/"><i class="fas fa-lightbulb"></i> Skills</a>
+              <a href="/projects/"><i class="fas fa-code"></i> Projects</a>
+              <a href="/resume/"><i class="fas fa-file-alt"></i> Resume</a>
+              <a href="/contact/"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+          </div>
         </div>
-        <div class="menu-toggle" onclick="toggleMenu()">
-          <span></span><span></span><span></span>
-        </div>
-        <div class="socials desktop">
-          <a href="#">LinkedIn</a>
-          <a href="#">GitHub</a>
-          <a href="#">Twitter</a>
-        </div>
-        <div class="socials mobile" id="mobileMenu">
-          <a href="#">LinkedIn</a>
-          <a href="#">GitHub</a>
-          <a href="#">Twitter</a>
+
+        <!-- Right Side -->
+        <div
+          class="nav-right"
+          style="display: flex; align-items: center; gap: 20px"
+        >
+          <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="#"><i class="fab fa-github"></i> GitHub</a>
+          <a href="#"><i class="fab fa-x-twitter"></i> Twitter</a>
         </div>
       </nav>
 
+      <!-- Hero -->
       <section class="hero">
         <div class="avatar">
           <img
@@ -281,23 +436,31 @@
         </button>
       </section>
 
+      <!-- Logo Ticker -->
       <div class="logos-wrapper">
         <div class="logos">
-          <div class="logo">TensorFlow</div>
-          <div class="logo">PyTorch</div>
-          <div class="logo">AWS</div>
-          <div class="logo">MLflow</div>
-          <div class="logo">Docker</div>
-          <div class="logo">Kubernetes</div>
-          <div class="logo">TensorFlow</div>
-          <div class="logo">PyTorch</div>
-          <div class="logo">AWS</div>
-          <div class="logo">MLflow</div>
-          <div class="logo">Docker</div>
-          <div class="logo">Kubernetes</div>
+          <div class="logo"><i class="fab fa-python"></i> PyTorch</div>
+          <div class="logo"><i class="fab fa-aws"></i> AWS</div>
+          <div class="logo"><i class="fab fa-docker"></i> Docker</div>
+          <div class="logo">
+            <i class="fas fa-network-wired"></i> Kubernetes
+          </div>
+          <div class="logo"><i class="fas fa-project-diagram"></i> MLflow</div>
+          <div class="logo"><i class="fab fa-tensorflow"></i> TensorFlow</div>
+
+          <!-- repeated for seamless scroll -->
+          <div class="logo"><i class="fab fa-python"></i> PyTorch</div>
+          <div class="logo"><i class="fab fa-aws"></i> AWS</div>
+          <div class="logo"><i class="fab fa-docker"></i> Docker</div>
+          <div class="logo">
+            <i class="fas fa-network-wired"></i> Kubernetes
+          </div>
+          <div class="logo"><i class="fas fa-project-diagram"></i> MLflow</div>
+          <div class="logo"><i class="fab fa-tensorflow"></i> TensorFlow</div>
         </div>
       </div>
 
+      <!-- Services -->
       <section class="services">
         <h2>Expertise in Building AI Solutions</h2>
         <div class="grid">
@@ -330,6 +493,7 @@
         </div>
       </section>
 
+      <!-- Contact -->
       <section class="contact" id="contact">
         <h2>Let’s Collaborate on Your AI Project</h2>
         <button
@@ -338,16 +502,28 @@
         >
           Email Me
         </button>
-        <button class="pill" onclick="copyWhatsapp()">WhatsApp</button>
+        <button class="pill" onclick="location.href='/contact/'">
+          Contact
+        </button>
       </section>
 
+      <!-- Footer -->
       <footer>
         <div>© 2025 All rights reserved.</div>
         <div>LinkedIn / GitHub / Twitter</div>
       </footer>
     </div>
-
     <script>
+      // Shrink navbar on scroll
+      window.addEventListener("scroll", function () {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 20) {
+          nav.classList.add("scrolled");
+        } else {
+          nav.classList.remove("scrolled");
+        }
+      });
+
       function toggleMenu() {
         const menu = document.getElementById("mobileMenu");
         menu.style.display = menu.style.display === "flex" ? "none" : "flex";

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>403 Forbidden - Spooky Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800;900&family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-gradient: radial-gradient(
+            1200px 600px at 20% 30%,
+            #1b0a2e 0%,
+            #13071f 40%,
+            #0b0414 100%
+          ),
+          linear-gradient(135deg, #2a0845, #6a0572);
+        --glow-color: #00fff7;
+        --accent-color: #ff33f6;
+        --text-color: #e0e0e0;
+        --blood: #ff1744;
+        --web: #cfd8dc;
+        --font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto,
+          sans-serif;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: var(--bg-gradient);
+        color: var(--text-color);
+        font-family: var(--font-family);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        padding: 20px;
+        overflow: hidden;
+      }
+      .container {
+        position: relative;
+        max-width: 560px;
+        z-index: 3;
+      }
+      h1 {
+        font-size: clamp(6rem, 18vw, 12rem);
+        line-height: 0.8;
+        margin: 0;
+        font-weight: 900;
+        text-shadow: 0 0 15px var(--glow-color), 0 0 30px var(--glow-color),
+          0 0 45px var(--glow-color);
+        animation: pulse 3s infinite;
+        user-select: none;
+        cursor: default;
+        letter-spacing: -0.04em;
+        position: relative;
+        font-family: "Creepster", cursive;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          text-shadow: 0 0 15px var(--glow-color), 0 0 30px var(--glow-color),
+            0 0 45px var(--glow-color);
+          color: var(--text-color);
+          transform: scale(1);
+        }
+        50% {
+          text-shadow: 0 0 30px var(--accent-color),
+            0 0 60px var(--accent-color), 0 0 80px var(--accent-color);
+          color: var(--accent-color);
+          transform: scale(1.03);
+        }
+      }
+      .lock-wrap {
+        position: relative;
+        display: inline-block;
+      }
+      .lock {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 15px);
+        bottom: -28px;
+        width: clamp(60px, 16vw, 90px);
+        height: auto;
+        z-index: -1;
+        opacity: 0.21;
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.1))
+          drop-shadow(0 0 22px rgba(255, 0, 90, 0.16));
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      @keyframes lock-flicker {
+        0%,
+        19%,
+        21%,
+        23%,
+        25%,
+        54%,
+        56%,
+        100% {
+          opacity: 1;
+        }
+        20%,
+        24%,
+        55% {
+          opacity: 0.6;
+        }
+      }
+      .container:hover .lock {
+        opacity: 0.33;
+        transform: translate(-50%, 0) scale(1.04);
+      }
+      .web {
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        opacity: 0.28;
+        z-index: 1;
+      }
+      .web svg {
+        width: 100%;
+        height: 100%;
+        stroke: var(--web);
+        fill: none;
+      }
+      .web.tl {
+        top: 0;
+        left: 0;
+        transform: translate(-30%, -30%);
+      }
+      .web.tr {
+        top: 0;
+        right: 0;
+        transform: translate(30%, -30%) scaleX(-1);
+      }
+      .bats {
+        pointer-events: none;
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        overflow: hidden;
+      }
+      .bat {
+        position: absolute;
+        top: -40px;
+        width: 28px;
+        height: 12px;
+        background: currentColor;
+        color: #c2c7cf;
+        border-radius: 6px 6px 0 0;
+        transform: scale(var(--s)) rotate(0deg);
+        animation: fly var(--d) linear infinite;
+      }
+      .bat::before,
+      .bat::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 20px;
+        height: 12px;
+        background: currentColor;
+        border-radius: 12px 12px 0 0;
+      }
+      .bat::before {
+        left: -18px;
+        transform-origin: 100% 0;
+        animation: flap 0.25s ease-in-out infinite;
+      }
+      .bat::after {
+        right: -18px;
+        transform-origin: 0 0;
+        animation: flap 0.25s ease-in-out infinite reverse;
+      }
+      @keyframes flap {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(22deg);
+        }
+      }
+      @keyframes fly {
+        0% {
+          transform: translateX(-10%) translateY(var(--y)) scale(var(--s));
+        }
+        100% {
+          transform: translateX(110%) translateY(calc(var(--y) + 30px))
+            scale(var(--s));
+        }
+      }
+      .fog {
+        position: absolute;
+        inset: -20% -40%;
+        background: radial-gradient(
+          closest-side,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0) 60%
+        );
+        filter: blur(18px);
+        animation: drift var(--t) linear infinite;
+        z-index: 0;
+      }
+      .fog.f1 {
+        --t: 48s;
+        opacity: 0.35;
+        transform: translateX(-10%);
+      }
+      .fog.f2 {
+        --t: 64s;
+        opacity: 0.28;
+        transform: translateX(10%);
+      }
+      @keyframes drift {
+        from {
+          transform: translateX(-12%);
+        }
+        to {
+          transform: translateX(12%);
+        }
+      }
+      /* cloud layers */
+      .cloud {
+        position: absolute;
+        z-index: 2;
+        opacity: 0.12;
+        pointer-events: none;
+        animation: cloud-move 70s linear infinite;
+      }
+      .cloud.c1 {
+        top: 14%;
+        left: -200px;
+        width: 300px;
+        height: 90px;
+        animation-duration: 82s;
+      }
+      .cloud.c2 {
+        top: 38%;
+        left: -320px;
+        width: 400px;
+        height: 110px;
+        animation-duration: 54s;
+      }
+      .cloud.c3 {
+        top: 62%;
+        left: -260px;
+        width: 280px;
+        height: 70px;
+        animation-duration: 61s;
+      }
+      @keyframes cloud-move {
+        0% {
+          left: -400px;
+        }
+        100% {
+          left: 120vw;
+        }
+      }
+      /* flies */
+      .flies {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .fly {
+        position: absolute;
+        width: 22px;
+        height: 16px;
+        will-change: transform;
+        z-index: 10;
+        pointer-events: none;
+        transition: filter 0.2s;
+        filter: drop-shadow(0 0 4px #111);
+        animation: fly-flap 0.22s infinite linear;
+      }
+      .fly:hover {
+        filter: drop-shadow(0 0 16px #ff1744);
+      }
+      .fly svg {
+        width: 100%;
+        height: 100%;
+      }
+      @keyframes fly-flap {
+        0%,
+        100% {
+          transform: scaleY(1);
+        }
+        50% {
+          transform: scaleY(1.2);
+        }
+      }
+      .noise {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.045"/></svg>');
+        opacity: 0.25;
+        mix-blend-mode: soft-light;
+        z-index: 4;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      p.main-msg {
+        font-size: 1.7rem;
+        font-weight: 800;
+        margin: 0.4em 0 0.6em;
+        letter-spacing: 0.5px;
+      }
+      p.info {
+        font-size: 1.05rem;
+        line-height: 1.5;
+        margin: 0 0 2rem;
+        color: #bcbcbc;
+      }
+      a.home-link {
+        display: inline-block;
+        padding: 14px 36px;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #0b0414;
+        background: var(--accent-color);
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color),
+          0 0 30px var(--accent-color);
+        transition: transform 0.15s ease, box-shadow 0.3s ease,
+          background 0.3s ease;
+      }
+      a.home-link:hover {
+        transform: translateY(-2px) scale(1.02);
+        background: var(--glow-color);
+        box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color),
+          0 0 60px var(--glow-color);
+        color: #0b0414;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Cobwebs -->
+    <div class="web tl" aria-hidden="true">
+      <svg
+        viewBox="0 0 200 200"
+        role="img"
+        aria-label="Decorative cobweb top left"
+      >
+        <path
+          d="M0 0 L200 0 M0 0 L0 200 M0 0 C50 0 50 50 100 50 M0 0 C0 50 50 50 50 100 M0 0 C70 0 70 70 140 70 M0 0 C0 70 70 70 70 140"
+          stroke-width="1.5"
+        />
+      </svg>
+    </div>
+    <div class="web tr" aria-hidden="true">
+      <svg
+        viewBox="0 0 200 200"
+        role="img"
+        aria-label="Decorative cobweb top right"
+      >
+        <path
+          d="M0 0 L200 0 M0 0 L0 200 M0 0 C50 0 50 50 100 50 M0 0 C0 50 50 50 50 100 M0 0 C70 0 70 70 140 70 M0 0 C0 70 70 70 70 140"
+          stroke-width="1.5"
+        />
+      </svg>
+    </div>
+    <!-- Clouds -->
+    <div class="cloud c1">
+      <svg viewBox="0 0 300 90">
+        <ellipse cx="75" cy="45" rx="75" ry="42" fill="#fff" />
+        <ellipse cx="200" cy="55" rx="67" ry="31" fill="#fff" />
+        <ellipse cx="195" cy="33" rx="34" ry="21" fill="#fff" />
+        <ellipse cx="250" cy="62" rx="38" ry="12" fill="#fff" />
+      </svg>
+    </div>
+    <div class="cloud c2">
+      <svg viewBox="0 0 400 110">
+        <ellipse cx="150" cy="55" rx="110" ry="45" fill="#fff" />
+        <ellipse cx="310" cy="76" rx="80" ry="32" fill="#fff" />
+        <ellipse cx="250" cy="35" rx="50" ry="20" fill="#fff" />
+        <ellipse cx="70" cy="90" rx="52" ry="16" fill="#fff" />
+      </svg>
+    </div>
+    <div class="cloud c3">
+      <svg viewBox="0 0 280 70">
+        <ellipse cx="60" cy="35" rx="49" ry="18" fill="#fff" />
+        <ellipse cx="135" cy="23" rx="36" ry="19" fill="#fff" />
+        <ellipse cx="220" cy="43" rx="34" ry="13" fill="#fff" />
+      </svg>
+    </div>
+    <!-- Bats -->
+    <div class="bats" aria-hidden="true">
+      <span class="bat" style="--y: 10vh; --s: 1; --d: 18s"></span>
+      <span class="bat" style="--y: 30vh; --s: 0.9; --d: 22s"></span>
+      <span class="bat" style="--y: 50vh; --s: 1.2; --d: 26s"></span>
+      <span class="bat" style="--y: 20vh; --s: 0.8; --d: 20s"></span>
+      <span class="bat" style="--y: 60vh; --s: 1.1; --d: 24s"></span>
+    </div>
+    <!-- Fog -->
+    <div class="fog f1" aria-hidden="true"></div>
+    <div class="fog f2" aria-hidden="true"></div>
+    <!-- Animated flies -->
+    <div class="flies" id="flies-403"></div>
+    <!-- Content with haunted lock -->
+    <div class="container" role="main">
+      <div class="lock-wrap">
+        <h1 aria-label="Error 403">403</h1>
+        <svg
+          class="lock"
+          viewBox="0 0 64 64"
+          role="img"
+          aria-label="Locked padlock"
+        >
+          <rect
+            x="16"
+            y="28"
+            width="32"
+            height="20"
+            rx="8"
+            fill="#fff"
+            opacity="0.95"
+          />
+          <ellipse cx="32" cy="22" rx="11" ry="12" fill="#fff" opacity="0.4" />
+          <rect x="29" y="38" width="6" height="9" rx="3" fill="#ff1744" />
+          <rect
+            x="20"
+            y="30"
+            width="24"
+            height="14"
+            rx="6"
+            fill="#e0e0e0"
+            opacity="0.3"
+          />
+          <rect x="28" y="18" width="8" height="20" rx="4" fill="#111" />
+        </svg>
+      </div>
+      <p class="main-msg">Forbidden! You don't have permission to enter...</p>
+      <p class="info">
+        This page is off limits to mortals.<br />If you think you should have
+        access, check your credentials or return to safety.
+      </p>
+      <a href="./index.html" class="home-link" aria-label="Go to homepage"
+        >Go Back Home</a
+      >
+    </div>
+    <!-- Grain -->
+    <div class="noise" aria-hidden="true"></div>
+    <script>
+      // Animated flies around the screen
+      function random(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+      function spawnFlies(n) {
+        const flies = document.getElementById("flies-403");
+        for (let i = 0; i < n; i++) {
+          const fly = document.createElement("div");
+          fly.className = "fly";
+          fly.innerHTML = `
+        <svg viewBox="0 0 22 16">
+          <ellipse cx="11" cy="8" rx="8" ry="7" fill="#222"/>
+          <ellipse cx="6" cy="6" rx="4" ry="5" fill="#999"/>
+          <ellipse cx="16" cy="6" rx="4" ry="5" fill="#999"/>
+          <ellipse cx="8" cy="10" rx="2.5" ry="2" fill="#111"/>
+          <ellipse cx="14" cy="10" rx="2.5" ry="2" fill="#111"/>
+        </svg>
+      `;
+          // Random start position
+          let x = random(0, window.innerWidth - 22);
+          let y = random(0, window.innerHeight - 16);
+          fly.style.left = x + "px";
+          fly.style.top = y + "px";
+          // Animate movement
+          function moveFly() {
+            const nx = random(0, window.innerWidth - 22);
+            const ny = random(0, window.innerHeight - 16);
+            fly.style.transition =
+              "left 2.2s cubic-bezier(.71,.01,.81,.99), top 2.2s cubic-bezier(.71,.01,.81,.99)";
+            fly.style.left = nx + "px";
+            fly.style.top = ny + "px";
+            setTimeout(moveFly, random(700, 2600));
+          }
+          setTimeout(moveFly, random(400, 1200));
+          flies.appendChild(fly);
+        }
+      }
+      spawnFlies(7);
+    </script>
+  </body>
+</html>
