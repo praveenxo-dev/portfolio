@@ -147,7 +147,6 @@
         background: var(--primary-hover);
         box-shadow: 0 5px 15px rgba(255, 111, 97, 0.4);
       }
-      /* Logo Ticker */
       .logos-wrapper {
         overflow: hidden;
         background: rgba(255, 255, 255, 0.05);
@@ -155,12 +154,28 @@
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
       }
+
       .logos {
         display: flex;
         gap: 20px;
+        width: max-content; /* prevent shrink */
         animation: scrollLogos 20s linear infinite;
-        will-change: transform;
       }
+
+      @keyframes scrollLogos {
+        from {
+          transform: translateX(10);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* Pause on hover */
+      .logos-wrapper:hover .logos {
+        animation-play-state: paused;
+      }
+
       .logo {
         padding: 10px 20px;
         background: rgba(0, 0, 0, 0.4);
@@ -178,14 +193,14 @@
         background: rgba(255, 255, 255, 0.15);
         transform: scale(1.08);
       }
-      @keyframes scrollLogos {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-50%);
-        }
+
+      .logo img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        vertical-align: middle;
       }
+
       /* Services */
       .services {
         text-align: center;
@@ -411,9 +426,13 @@
           class="nav-right"
           style="display: flex; align-items: center; gap: 20px"
         >
-          <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-          <a href="#"><i class="fab fa-github"></i> GitHub</a>
-          <a href="#"><i class="fab fa-x-twitter"></i> Twitter</a>
+          <a href="https://linkedin.com/in/praveen-v-ml"
+            ><i class="fab fa-linkedin"></i> LinkedIn</a
+          >
+          <a href="https://github.com/Blood-titan"
+            ><i class="fab fa-github"></i> GitHub</a
+          >
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
         </div>
       </nav>
 
@@ -445,7 +464,16 @@
             <i class="fas fa-network-wired"></i> Kubernetes
           </div>
           <div class="logo"><i class="fas fa-project-diagram"></i> MLflow</div>
-          <div class="logo"><i class="fab fa-tensorflow"></i> TensorFlow</div>
+
+          <!-- TensorFlow official logo -->
+          <div class="logo">
+            <img
+              src="/assest/image/TensorFlow_logo.svg.png"
+              alt="TensorFlow Logo"
+              style="width: 20px; height: 20px; object-fit: contain"
+            />
+            TensorFlow
+          </div>
 
           <!-- repeated for seamless scroll -->
           <div class="logo"><i class="fab fa-python"></i> PyTorch</div>
@@ -455,13 +483,35 @@
             <i class="fas fa-network-wired"></i> Kubernetes
           </div>
           <div class="logo"><i class="fas fa-project-diagram"></i> MLflow</div>
-          <div class="logo"><i class="fab fa-tensorflow"></i> TensorFlow</div>
+          <div class="logo">
+            <img
+              src="/assest/image/TensorFlow_logo.svg.png"
+              alt="TensorFlow Logo"
+              style="width: 20px; height: 20px; object-fit: contain"
+            />
+            TensorFlow
+          </div>
+          <div class="logo"><i class="fab fa-python"></i> PyTorch</div>
+          <div class="logo"><i class="fab fa-aws"></i> AWS</div>
+          <div class="logo"><i class="fab fa-docker"></i> Docker</div>
+          <div class="logo">
+            <i class="fas fa-network-wired"></i> Kubernetes
+          </div>
+          <div class="logo"><i class="fas fa-project-diagram"></i> MLflow</div>
+          <div class="logo">
+            <img
+              src="/assest/image/TensorFlow_logo.svg.png"
+              alt="TensorFlow Logo"
+              style="width: 20px; height: 20px; object-fit: contain"
+            />
+            TensorFlow
+          </div>
         </div>
       </div>
 
       <!-- Services -->
       <section class="services">
-        <h2>Expertise in Building AI Solutions</h2>
+        <h2>Expertise in Building ML Solutions</h2>
         <div class="grid">
           <div class="card">
             <h3>Model Development</h3>
@@ -486,7 +536,7 @@
           <div class="card">
             <h3>Research & Innovation</h3>
             <p>
-              Exploring cutting-edge techniques to push the boundaries of AI.
+              Exploring cutting-edge techniques to push the boundaries of ML.
             </p>
           </div>
         </div>
@@ -494,7 +544,7 @@
 
       <!-- Contact -->
       <section class="contact" id="contact">
-        <h2>Let’s Collaborate on Your AI Project</h2>
+        <h2>Let’s Collaborate on Your AI/ML Project</h2>
         <button
           class="cta-primary"
           onclick="location.href='mailto:mlengineer@yourname.com'"
@@ -509,7 +559,6 @@
       <!-- Footer -->
       <footer>
         <div>© 2025 All rights reserved.</div>
-        <div>LinkedIn / GitHub / Twitter</div>
       </footer>
     </div>
     <script>
