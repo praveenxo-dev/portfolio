@@ -547,7 +547,7 @@
         <h2>Let’s Collaborate on Your AI/ML Project</h2>
         <button
           class="cta-primary"
-          onclick="location.href='mailto:mlengineer@yourname.com'"
+          onclick="location.href='mailto:praveen33105@gmail.com'"
         >
           Email Me
         </button>
@@ -578,13 +578,32 @@
       }
 
       function downloadCV() {
-        alert("Download CV functionality goes here.");
+        // Update CV_URL to the actual path/filename in your project (currently using 'assest' folder)
+        const CV_URL = "/assest/pdf/resume.pdf";
+
+        (async () => {
+          try {
+            const resp = await fetch(CV_URL, { cache: "no-store" });
+            if (!resp.ok) throw new Error("CV not available");
+            const blob = await resp.blob();
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "Praveen_CV.pdf"; // filename for downloaded file
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+
+            // cleanup
+            setTimeout(() => URL.revokeObjectURL(url), 500);
+          } catch (err) {
+            // fallback: open the file in a new tab (useful if server doesn't allow downloads)
+            window.open(CV_URL, "_blank", "noopener");
+          }
+        })();
       }
-      function copyWhatsapp() {
-        navigator.clipboard
-          .writeText("+1234567890")
-          .then(() => alert("Phone number copied!"));
-      }
+      // Copy Email to Clipboard
       document
         .getElementById("copyEmail")
         .addEventListener("click", function () {
