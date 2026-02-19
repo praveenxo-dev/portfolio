@@ -9,28 +9,35 @@
   </url>
 
   <url>
-    <loc>https://praveenxo.netlify.app/skills</loc>
+    <loc>https://praveenxo.netlify.app/about/</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://praveenxo.netlify.app/resume</loc>
-    <lastmod>2026-02-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://praveenxo.netlify.app/projects</loc>
+    <loc>https://praveenxo.netlify.app/skills/</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://praveenxo.netlify.app/contact</loc>
+    <loc>https://praveenxo.netlify.app/projects/</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://praveenxo.netlify.app/resume/</loc>
+    <lastmod>2026-02-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://praveenxo.netlify.app/contact/</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
