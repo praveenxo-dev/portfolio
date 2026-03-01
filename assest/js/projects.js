@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const username = "Blood-titan";
 
   // ⚠️ Replace this with your GitHub fine-grained token (read-only public repo access)
-  const token = "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";
+  // add form environment variable in vercel and add it here like process.env.GITHUB_TOKEN
+  const token = process.env.GITHUB_TOKEN;
 
   const query = `
     query {
