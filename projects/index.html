@@ -287,7 +287,10 @@
 
     <footer class="site-footer">
       <div class="footer-content">
-        <span>© 2025 Praveen V. All rights reserved.</span>
+        <script>
+          const currentYear = new Date().getFullYear();
+          document.write(`&copy; ${currentYear} Praveen V. All rights reserved.`);
+        </script>
       </div>
     </footer>
 
